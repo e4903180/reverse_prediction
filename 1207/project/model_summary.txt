@@ -1,0 +1,57 @@
+Model: "sequential_2"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ conv1d_4 (Conv1D)           (None, 64, 32)            2464      
+                                                                 
+ batch_normalization_8 (Batc  (None, 64, 32)           128       
+ hNormalization)                                                 
+                                                                 
+ activation_8 (Activation)   (None, 64, 32)            0         
+                                                                 
+ dropout_8 (Dropout)         (None, 64, 32)            0         
+                                                                 
+ max_pooling1d_4 (MaxPooling  (None, 32, 32)           0         
+ 1D)                                                             
+                                                                 
+ conv1d_5 (Conv1D)           (None, 31, 96)            6240      
+                                                                 
+ batch_normalization_9 (Batc  (None, 31, 96)           384       
+ hNormalization)                                                 
+                                                                 
+ activation_9 (Activation)   (None, 31, 96)            0         
+                                                                 
+ dropout_9 (Dropout)         (None, 31, 96)            0         
+                                                                 
+ max_pooling1d_5 (MaxPooling  (None, 15, 96)           0         
+ 1D)                                                             
+                                                                 
+ lstm_4 (LSTM)               (None, 128)               115200    
+                                                                 
+ batch_normalization_10 (Bat  (None, 128)              512       
+ chNormalization)                                                
+                                                                 
+ activation_10 (Activation)  (None, 128)               0         
+                                                                 
+ dropout_10 (Dropout)        (None, 128)               0         
+                                                                 
+ repeat_vector_2 (RepeatVect  (None, 16, 128)          0         
+ or)                                                             
+                                                                 
+ lstm_5 (LSTM)               (None, 16, 64)            49408     
+                                                                 
+ batch_normalization_11 (Bat  (None, 16, 64)           256       
+ chNormalization)                                                
+                                                                 
+ activation_11 (Activation)  (None, 16, 64)            0         
+                                                                 
+ dropout_11 (Dropout)        (None, 16, 64)            0         
+                                                                 
+ time_distributed_2 (TimeDis  (None, 16, 2)            130       
+ tributed)                                                       
+                                                                 
+=================================================================
+Total params: 174,722
+Trainable params: 174,082
+Non-trainable params: 640
+_________________________________________________________________

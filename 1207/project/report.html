@@ -1,0 +1,209 @@
+
+        <html>
+            <head>
+                <title>Stock Price Prediction Report</title>
+            </head>
+            <body>
+                <h1>Stock Price Prediction Report</h1>
+                <h2>Model Summary</h2>
+                <pre>Model: "sequential"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ conv1d (Conv1D)             (None, 64, 32)            2464      
+                                                                 
+ batch_normalization (BatchN  (None, 64, 32)           128       
+ ormalization)                                                   
+                                                                 
+ activation (Activation)     (None, 64, 32)            0         
+                                                                 
+ dropout (Dropout)           (None, 64, 32)            0         
+                                                                 
+ max_pooling1d (MaxPooling1D  (None, 32, 32)           0         
+ )                                                               
+                                                                 
+ conv1d_1 (Conv1D)           (None, 31, 96)            6240      
+                                                                 
+ batch_normalization_1 (Batc  (None, 31, 96)           384       
+ hNormalization)                                                 
+                                                                 
+ activation_1 (Activation)   (None, 31, 96)            0         
+                                                                 
+ dropout_1 (Dropout)         (None, 31, 96)            0         
+                                                                 
+ max_pooling1d_1 (MaxPooling  (None, 15, 96)           0         
+ 1D)                                                             
+                                                                 
+ lstm (LSTM)                 (None, 128)               115200    
+                                                                 
+ batch_normalization_2 (Batc  (None, 128)              512       
+ hNormalization)                                                 
+                                                                 
+ activation_2 (Activation)   (None, 128)               0         
+                                                                 
+ dropout_2 (Dropout)         (None, 128)               0         
+                                                                 
+ repeat_vector (RepeatVector  (None, 16, 128)          0         
+ )                                                               
+                                                                 
+ lstm_1 (LSTM)               (None, 16, 64)            49408     
+                                                                 
+ batch_normalization_3 (Batc  (None, 16, 64)           256       
+ hNormalization)                                                 
+                                                                 
+ activation_3 (Activation)   (None, 16, 64)            0         
+                                                                 
+ dropout_3 (Dropout)         (None, 16, 64)            0         
+                                                                 
+ time_distributed (TimeDistr  (None, 16, 2)            130       
+ ibuted)                                                         
+                                                                 
+=================================================================
+Total params: 174,722
+Trainable params: 174,082
+Non-trainable params: 640
+_________________________________________________________________
+</pre>
+                <h2>Training Report</h2>
+                <img src="plots/training_curve.png" />
+                <pre>plots/training_curve.png</pre>
+                <h2>Online Training Report</h2>
+                <img src="plots/online_training_curve.png" />
+                <pre>plots/online_training_curve.png</pre>
+                <h2>Confusion Matrix</h2>
+                <pre>
+Accuracy: 0.72
+Precision: 0.65
+Recall: 0.63
+F1 Score: 0.64
+
+        </pre>
+                <img src="plots/confusion_matrix.png" />
+                <h2>Trading Details</h2>
+                <img src="plots/trading_details_kbar.png" />
+                <h2>Trade Summary</h2>
+                <pre><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sharpe_ratio</th>
+      <th>initial_value</th>
+      <th>final_value</th>
+      <th>total_return</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>-0.602252</td>
+      <td>10000.0</td>
+      <td>10203.138171</td>
+      <td>1.020314</td>
+    </tr>
+  </tbody>
+</table></pre>
+                <h2>Trade Details</h2>
+                <pre>2015-06-24, SINGLE SELL EXECUTED
+2015-06-25, SELL EXECUTED, Price: 2109.9599609375, Cost: -2109.9599609375, Commission: 2.1099599609375, Cash: 12107.850000976563, Value: 10005.539942382813
+2015-06-29, DOUBLE BUY EXECUTED
+2015-06-30, BUY EXECUTED, Price: 2061.18994140625, Cost: -48.77001953125, Commission: 4.1223798828125, Cash: 7981.34773828125, Value: 10044.457845703124
+2015-08-24, DOUBLE SELL EXECUTED
+2015-08-25, SELL EXECUTED, Price: 1898.0799560546875, Cost: 163.1099853515625, Commission: 3.796159912109375, Cash: 11773.711490478516, Value: 9906.101505126953
+2015-09-21, DOUBLE BUY EXECUTED
+2015-09-22, BUY EXECUTED, Price: 1961.3900146484375, Cost: 63.31005859375, Commission: 3.922780029296875, Cash: 7847.008681152343, Value: 9789.748671386718
+2015-09-24, DOUBLE SELL EXECUTED
+2015-09-25, SELL EXECUTED, Price: 1935.9300537109375, Cost: 25.4599609375, Commission: 3.8718601074218753, Cash: 11714.996928466797, Value: 9783.656962646484
+2015-10-16, DOUBLE BUY EXECUTED
+2015-10-19, BUY EXECUTED, Price: 2031.72998046875, Cost: 95.7999267578125, Commission: 4.0634599609375, Cash: 7647.47350756836, Value: 9681.133541748048
+2015-12-24, DOUBLE SELL EXECUTED
+2015-12-28, SELL EXECUTED, Price: 2057.77001953125, Cost: -26.0400390625, Commission: 4.1155400390625, Cash: 11758.898006591797, Value: 9702.398006591797
+2016-02-05, DOUBLE BUY EXECUTED
+2016-02-08, BUY EXECUTED, Price: 1873.25, Cost: -184.52001953125, Commission: 3.7465, Cash: 8008.6515065917965, Value: 9862.091447998046
+2016-02-11, DOUBLE SELL EXECUTED
+2016-02-12, SELL EXECUTED, Price: 1833.4000244140625, Cost: 39.8499755859375, Commission: 3.666800048828125, Cash: 11671.784755371093, Value: 9807.004726074218
+2016-02-17, DOUBLE BUY EXECUTED
+2016-02-18, BUY EXECUTED, Price: 1927.5699462890625, Cost: 94.169921875, Commission: 3.855139892578125, Cash: 7812.78972290039, Value: 9730.619678955078
+2016-05-13, DOUBLE SELL EXECUTED
+2016-05-16, SELL EXECUTED, Price: 2046.530029296875, Cost: -118.9600830078125, Commission: 4.09306005859375, Cash: 11901.756721435548, Value: 9835.096809326173
+2016-05-27, DOUBLE BUY EXECUTED
+2016-05-31, BUY EXECUTED, Price: 2100.1298828125, Cost: 53.599853515625, Commission: 4.200259765625, Cash: 7697.296696044923, Value: 9794.246647216798
+2016-06-24, DOUBLE SELL EXECUTED
+2016-06-27, SELL EXECUTED, Price: 2031.449951171875, Cost: 68.679931640625, Commission: 4.06289990234375, Cash: 11756.13369848633, Value: 9755.59365942383
+2016-07-22, DOUBLE BUY EXECUTED
+2016-07-25, BUY EXECUTED, Price: 2173.7099609375, Cost: 142.260009765625, Commission: 4.347419921875, Cash: 7404.366356689455, Value: 9572.846337158204
+2016-09-29, DOUBLE SELL EXECUTED
+2016-09-30, SELL EXECUTED, Price: 2156.510009765625, Cost: 17.199951171875, Commission: 4.31302001953125, Cash: 11713.073356201174, Value: 9544.803336669924
+2016-10-13, DOUBLE BUY EXECUTED
+2016-10-14, BUY EXECUTED, Price: 2139.679931640625, Cost: -16.830078125, Commission: 4.27935986328125, Cash: 7429.434133056642, Value: 9562.414113525392
+2016-10-21, DOUBLE SELL EXECUTED
+2016-10-24, SELL EXECUTED, Price: 2148.5, Cost: -8.820068359375, Commission: 4.297, Cash: 11722.137133056644, Value: 9570.807054931644
+2016-11-28, DOUBLE BUY EXECUTED
+2016-11-29, BUY EXECUTED, Price: 2200.760009765625, Cost: 52.260009765625, Commission: 4.40152001953125, Cash: 7316.215593505862, Value: 9520.875505615237
+2017-05-23, DOUBLE SELL EXECUTED
+2017-05-24, SELL EXECUTED, Price: 2401.409912109375, Cost: -200.64990234375, Commission: 4.8028198242187505, Cash: 12114.232597900394, Value: 9709.84270532227
+2017-06-13, DOUBLE BUY EXECUTED
+2017-06-14, BUY EXECUTED, Price: 2443.75, Cost: 42.340087890625, Commission: 4.8875, Cash: 7221.845097900394, Value: 9659.765019775394
+2017-08-21, DOUBLE SELL EXECUTED
+2017-08-22, SELL EXECUTED, Price: 2433.75, Cost: 10.0, Commission: 4.8675, Cash: 12084.477597900393, Value: 9631.967588134768
+2017-09-07, DOUBLE BUY EXECUTED
+2017-09-08, BUY EXECUTED, Price: 2462.25, Cost: 28.5, Commission: 4.9245, Cash: 7155.053097900393, Value: 9616.483029541017
+2018-02-23, DOUBLE SELL EXECUTED
+2018-02-26, SELL EXECUTED, Price: 2757.3701171875, Cost: -295.1201171875, Commission: 5.514740234375, Cash: 12664.278592041017, Value: 9884.678494384767
+2018-03-19, DOUBLE BUY EXECUTED
+2018-03-20, BUY EXECUTED, Price: 2715.050048828125, Cost: -42.320068359375, Commission: 5.43010009765625, Cash: 7228.748394287111, Value: 9945.688335693361
+2018-03-20, DOUBLE SELL EXECUTED
+2018-03-21, SELL EXECUTED, Price: 2714.989990234375, Cost: 0.06005859375, Commission: 5.42997998046875, Cash: 12653.298394775393, Value: 9941.368463134768
+2018-03-27, DOUBLE BUY EXECUTED
+2018-03-28, BUY EXECUTED, Price: 2611.300048828125, Cost: -103.68994140625, Commission: 5.22260009765625, Cash: 7425.475697021487, Value: 10030.475697021488
+2018-04-11, DOUBLE SELL EXECUTED
+2018-04-12, SELL EXECUTED, Price: 2653.830078125, Cost: -42.530029296875, Commission: 5.30766015625, Cash: 12727.828193115238, Value: 10063.838202880863
+2018-04-23, DOUBLE BUY EXECUTED
+2018-04-24, BUY EXECUTED, Price: 2680.800048828125, Cost: 26.969970703125, Commission: 5.36160009765625, Cash: 7360.866495361332, Value: 9995.426553955083
+2018-05-14, DOUBLE SELL EXECUTED
+2018-05-15, SELL EXECUTED, Price: 2718.590087890625, Cost: -37.7900390625, Commission: 5.43718017578125, Cash: 12792.609490966803, Value: 10081.159539794928
+2018-05-25, DOUBLE BUY EXECUTED
+2018-05-29, BUY EXECUTED, Price: 2705.110107421875, Cost: -13.47998046875, Commission: 5.41022021484375, Cash: 7376.979055908209, Value: 10066.839163330085
+2018-08-27, DOUBLE SELL EXECUTED
+2018-08-28, SELL EXECUTED, Price: 2901.449951171875, Cost: -196.33984375, Commission: 5.80289990234375, Cash: 13174.076058349616, Value: 10276.556038818366
+2018-09-19, DOUBLE BUY EXECUTED
+2018-09-20, BUY EXECUTED, Price: 2919.72998046875, Cost: 18.280029296875, Commission: 5.8394599609375, Cash: 7328.7766374511775, Value: 10259.526637451178
+2018-09-21, DOUBLE SELL EXECUTED
+2018-09-24, SELL EXECUTED, Price: 2921.830078125, Cost: -2.10009765625, Commission: 5.84366015625, Cash: 13166.593133544928, Value: 10247.223016357428
+2018-10-01, DOUBLE BUY EXECUTED
+2018-10-02, BUY EXECUTED, Price: 2923.800048828125, Cost: 1.969970703125, Commission: 5.84760009765625, Cash: 7313.145435791022, Value: 10236.575367431647
+2018-10-11, DOUBLE SELL EXECUTED
+2018-10-12, SELL EXECUTED, Price: 2770.5400390625, Cost: 153.260009765625, Commission: 5.541080078125, Cash: 12848.684433837898, Value: 10081.554551025398
+2018-12-12, DOUBLE BUY EXECUTED
+2018-12-13, BUY EXECUTED, Price: 2658.699951171875, Cost: -111.840087890625, Commission: 5.31739990234375, Cash: 7525.967131591805, Value: 10176.507170654306
+2019-01-15, DOUBLE SELL EXECUTED
+2019-01-16, SELL EXECUTED, Price: 2614.75, Cost: 43.949951171875, Commission: 5.2295, Cash: 12750.237631591805, Value: 10134.137533935555
+2019-01-22, DOUBLE BUY EXECUTED
+2019-01-23, BUY EXECUTED, Price: 2643.47998046875, Cost: 28.72998046875, Commission: 5.2869599609375, Cash: 7457.990710693368, Value: 10096.690661865243
+2019-06-04, DOUBLE SELL EXECUTED
+2019-06-05, SELL EXECUTED, Price: 2818.090087890625, Cost: -174.610107421875, Commission: 5.63618017578125, Cash: 13088.534706298837, Value: 10262.384803955087
+2019-06-26, DOUBLE BUY EXECUTED
+2019-06-27, BUY EXECUTED, Price: 2919.659912109375, Cost: 101.56982421875, Commission: 5.83931982421875, Cash: 7243.375562255867, Value: 10168.295484130867
+2019-12-03, DOUBLE SELL EXECUTED
+2019-12-04, SELL EXECUTED, Price: 3103.5, Cost: -183.840087890625, Commission: 6.207, Cash: 13444.168562255869, Value: 10331.408552490244
+2019-12-04, DOUBLE BUY EXECUTED
+2019-12-05, BUY EXECUTED, Price: 3119.2099609375, Cost: 15.7099609375, Commission: 6.238419921875, Cash: 7199.510220458993, Value: 10316.940152099618
+2020-03-09, DOUBLE SELL EXECUTED
+2020-03-10, SELL EXECUTED, Price: 2813.47998046875, Cost: 305.72998046875, Commission: 5.6269599609375005, Cash: 12820.843221435556, Value: 9938.613240966806
+2020-04-23, DOUBLE BUY EXECUTED
+2020-04-24, BUY EXECUTED, Price: 2812.639892578125, Cost: -0.840087890625, Commission: 5.62527978515625, Cash: 7189.9381564941505, Value: 10026.678146728525
+2020-07-02, DOUBLE SELL EXECUTED
+2020-07-06, SELL EXECUTED, Price: 3155.2900390625, Cost: -342.650146484375, Commission: 6.3105800781250005, Cash: 13494.207654541024, Value: 10314.487683837899
+2020-07-15, DOUBLE BUY EXECUTED
+2020-07-16, BUY EXECUTED, Price: 3208.360107421875, Cost: 53.070068359375, Commission: 6.4167202148437505, Cash: 7071.070719482429, Value: 10286.640787841803
+2020-10-01, DOUBLE SELL EXECUTED
+2020-10-02, SELL EXECUTED, Price: 3338.93994140625, Cost: -130.579833984375, Commission: 6.6778798828125, Cash: 13742.272722412115, Value: 10393.852800537115
+2020-10-23, DOUBLE BUY EXECUTED
+2020-10-26, BUY EXECUTED, Price: 3441.419921875, Cost: 102.47998046875, Commission: 6.88283984375, Cash: 6852.550038818365, Value: 10253.52000952149
+2020-11-04, DOUBLE SELL EXECUTED
+2020-11-05, SELL EXECUTED, Price: 3485.739990234375, Cost: -44.320068359375, Commission: 6.97147998046875, Cash: 13817.058539306647, Value: 10306.608588134772
+2020-11-16, SINGLE BUY EXECUTED
+2020-11-17, BUY EXECUTED, Price: 3610.31005859375, Cost: -3485.739990234375, Commission: 3.61031005859375, Cash: 10203.138170654303, Value: 10203.138170654303
+</pre>
+            </body>
+        </html>
+        

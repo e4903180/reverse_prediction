@@ -1,0 +1,58 @@
+{
+    "start_date": "2001-01-01",
+    "stop_date": "2021-01-01",
+    "stock_symbol": "^GSPC",
+    "features_params": [
+        {"type": "Trend", "method": "MA", "oder_days": 20,
+         "ma_days": 20, "trend_days": 5},
+        {"type": "MACD", "fastperiod": 5, "slowperiod": 10, "signalperiod": 9},
+        {"type": "ROC", "trend_days": 5},
+        {"type": "Stochastic Oscillator", "trend_days": 5},
+        {"type": "CCI", "timeperiod": 14},
+        {"type": "RSI", "timeperiod": 14},
+        {"type": "VMA", "timeperiod": 20},
+        {"type": "PctChange"},
+        {"type": "3M Treasury Yield", "start_date": "2001-01-01",
+            "end_date": "2021-01-01"},
+        {"type": "5Y Treasury Yield", "start_date": "2001-01-01",
+            "end_date": "2021-01-01"},
+        {"type": "10Y Treasury Yield",
+            "start_date": "2001-01-01", "end_date": "2021-01-01"},
+        {"type": "30Y Treasury Yield",
+            "start_date": "2001-01-01", "end_date": "2021-01-01"}
+    ],
+    "data_cleaning": {
+        "clean_type": "MissingData", 
+        "strategy": "auto"
+    },
+    "split_ratio": 0.7,
+    "target_col": "Trend",
+    "feature_cols": [
+        "MACD", "ROC", "CCI", "RSI", "VMA", 
+        "3M Treasury Yield", "5Y Treasury Yield",
+        "10Y Treasury Yield", "30Y Treasury Yield"
+    ],
+    "look_back": 64,
+    "predict_steps": 16,
+    "train_slide_steps": 1,
+    "test_slide_steps": 16,
+    "model_params": {
+        "conv_1_filter": 32,
+        "conv_1_kernel": 4,
+        "conv_1_l2": 0.00016475815766673417,
+        "dropout_1": 0.2,
+        "conv_2_filter": 96,
+        "conv_2_kernel": 2,
+        "dropout_2": 0.2,
+        "lstm_1_units": 128,
+        "lstm_1_l2": 0.0002788818914602332,
+        "dropout_3": 0.2,
+        "lstm_2_units": 64,
+        "dropout_4": 0.1,
+        "learning_rate": 0.001,
+        "look_back": 64,
+        "predict_steps": 16
+    },
+    "model_type" : "seq2seq"
+  }
+  
