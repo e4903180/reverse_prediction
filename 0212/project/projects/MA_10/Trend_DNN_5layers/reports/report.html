@@ -1,0 +1,918 @@
+
+        <html>
+            <head>
+                <title>Stock Price Prediction Report</title>
+            </head>
+            <body>
+                <h1>Stock Price Prediction Report</h1>
+                <h2>Parameters</h2>
+                <pre>{
+    "start_date": "2001-01-01",
+    "stop_date": "2021-01-01",
+    "stock_symbol": "^GSPC",
+    "features_params": [
+        {
+            "type": "Trend",
+            "method": "MA",
+            "oder_days": 10,
+            "ma_days": 10,
+            "trend_days": 5
+        },
+        {
+            "type": "MACD",
+            "fastperiod": 5,
+            "slowperiod": 10,
+            "signalperiod": 9
+        },
+        {
+            "type": "ROC",
+            "trend_days": 5
+        },
+        {
+            "type": "Stochastic Oscillator",
+            "trend_days": 5
+        },
+        {
+            "type": "CCI",
+            "timeperiod": 14
+        },
+        {
+            "type": "RSI",
+            "timeperiod": 14
+        },
+        {
+            "type": "VMA",
+            "timeperiod": 20
+        },
+        {
+            "type": "pctChange"
+        },
+        {
+            "type": "3M Treasury Yield",
+            "start_date": "2001-01-01",
+            "end_date": "2021-01-01"
+        },
+        {
+            "type": "5Y Treasury Yield",
+            "start_date": "2001-01-01",
+            "end_date": "2021-01-01"
+        },
+        {
+            "type": "10Y Treasury Yield",
+            "start_date": "2001-01-01",
+            "end_date": "2021-01-01"
+        },
+        {
+            "type": "30Y Treasury Yield",
+            "start_date": "2001-01-01",
+            "end_date": "2021-01-01"
+        },
+        {
+            "type": "Bollinger Bands",
+            "timeperiod": 20,
+            "nbdevup": 2,
+            "nbdevdn": 2
+        },
+        {
+            "type": "ATR",
+            "timeperiod": 14
+        },
+        {
+            "type": "OBV"
+        },
+        {
+            "type": "Ichimoku Cloud"
+        },
+        {
+            "type": "Parabolic SAR",
+            "start": 0.02,
+            "increment": 0.02,
+            "maximum": 0.2
+        },
+        {
+            "type": "MOM",
+            "timeperiod": 10
+        },
+        {
+            "type": "Williams %R",
+            "lookback_period": 14
+        },
+        {
+            "type": "Chaikin MF",
+            "timeperiod": 20
+        }
+    ],
+    "data_cleaning": {
+        "clean_type": "MissingData",
+        "strategy": "auto"
+    },
+    "split_ratio": 0.7,
+    "target_col": "Trend",
+    "feature_cols": [
+        "Trend"
+    ],
+    "look_back": 32,
+    "predict_steps": 8,
+    "train_slide_steps": 8,
+    "test_slide_steps": 8,
+    "model_params": {
+        "LeNet": {
+            "look_back": 32,
+            "predict_steps": 8,
+            "conv_1_in_channels": 19,
+            "conv_1_out_channels": 8,
+            "conv_1_kernel": 3,
+            "conv_1_padding": 1,
+            "MaxPool2d_1_kernel_size": 2,
+            "fc_1_out_features": 512,
+            "reshape": "False"
+        },
+        "LeNet_2": {
+            "look_back": 32,
+            "predict_steps": 8,
+            "conv_1_in_channels": 19,
+            "conv_1_out_channels": 6,
+            "conv_1_kernel": 3,
+            "conv_1_padding": 1,
+            "MaxPool2d_1_kernel_size": 2,
+            "conv_2_out_channels": 8,
+            "conv_2_kernel": 3,
+            "conv_2_padding": 1,
+            "MaxPool2d_2_kernel_size": 2,
+            "fc_1_out_features": 512,
+            "reshape": "False"
+        },
+        "RNN": {
+            "look_back": 32,
+            "predict_steps": 8,
+            "hidden_size": 32,
+            "num_layers": 1,
+            "dropout": 0.2,
+            "reshape": "False"
+        },
+        "LSTM": {
+            "look_back": 32,
+            "predict_steps": 8,
+            "hidden_size": 32,
+            "num_layers": 1,
+            "dropout": 0.2,
+            "reshape": "False"
+        },
+        "CNN_LSTM": {
+            "look_back": 32,
+            "predict_steps": 8,
+            "conv_1_in_channels": 19,
+            "conv_1_out_channels": 6,
+            "conv_1_kernel": 3,
+            "conv_1_padding": 1,
+            "MaxPool2d_1_kernel_size": 2,
+            "conv_2_out_channels": 8,
+            "conv_2_kernel": 3,
+            "conv_2_padding": 1,
+            "MaxPool2d_2_kernel_size": 2,
+            "fc_1_out_features": 512,
+            "hidden_size": 32,
+            "num_layers": 1,
+            "dropout": 0.2,
+            "reshape": "True"
+        },
+        "DNN_5layers": {
+            "predict_steps": 8,
+            "reshape": "False"
+        }
+    },
+    "model_type": "DNN_5layers",
+    "training_epoch_num": 1000,
+    "online_training_epoch_num": 10,
+    "learning_rate": 0.001,
+    "online_train_learning_rate": 0.001,
+    "filter": "False",
+    "patience": 10,
+    "min_delta": 0.01,
+    "apply_weight": "True",
+    "data_update_mode": "append",
+    "trade_strategy": "all",
+    "filter_reverse_trend": "True",
+    "trained_model_path": "models\\trained_model.pt",
+    "online_trained_model_path": "models\\online_trained_model.pt",
+    "plot_training_curve_save_path": "plots\\plot_training_curve.png",
+    "online_training_curve_save_path": "plots\\online_training_curve.png",
+    "confusion_matrix_save_path": "plots\\confusion_matrix.png",
+    "predictions_save_path": "plots\\predictions.png",
+    "filtered_predictions_save_path": "plots\\filtered_predictions.png",
+    "pred_trade_signals_plot_save_path": "plots\\pred_trade_signals_plot.png",
+    "test_trade_signals_plot_save_path": "plots\\test_trade_signals_plot.png",
+    "pred_days_difference_bar_chart_save_path": "plots\\pred_days_difference_bar_chart.png",
+    "report_save_path": "reports\\report.html",
+    "summary_save_path": "reports\\summary.txt"
+}</pre>
+                <h2>Model Summary</h2>
+                <pre>ModelDNN_5layers(
+  (fc1): Linear(in_features=32, out_features=256, bias=True)
+  (fc2): Linear(in_features=256, out_features=128, bias=True)
+  (fc3): Linear(in_features=128, out_features=64, bias=True)
+  (fc4): Linear(in_features=64, out_features=32, bias=True)
+  (fc5): Linear(in_features=32, out_features=16, bias=True)
+  (ln1): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+  (ln2): LayerNorm((128,), eps=1e-05, elementwise_affine=True)
+  (ln3): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+  (ln4): LayerNorm((32,), eps=1e-05, elementwise_affine=True)
+  (ln5): LayerNorm((16,), eps=1e-05, elementwise_affine=True)
+  (dropout): Dropout(p=0.5, inplace=False)
+), 
+Number of parameter: 53200</pre>
+                <h2>Execution time</h2>
+                <pre>Execution time: 104.47515892982483 seconds</pre>
+                <h2>Training Report</h2>
+                <img src="projects\MA_10\Trend_DNN_5layers\plots\plot_training_curve.png" />
+                <h2>Online Training Report</h2>
+                <img src="projects\MA_10\Trend_DNN_5layers\plots\online_training_curve.png" />
+                <h2>Confusion Matrix</h2>
+                <pre>
+Accuracy: 0.76
+Precision: 0.73
+Recall: 0.73
+F1 Score: 0.73
+
+        </pre>
+                <img src="projects\MA_10\Trend_DNN_5layers\plots\confusion_matrix.png" />
+                <h2>Predictions Compared With Actual Signals</h2>
+                <img src="projects\MA_10\Trend_DNN_5layers\plots\predictions.png" />
+                <h2>Filtered Predictions Compared With Actual Signals</h2>
+                <img src="projects\MA_10\Trend_DNN_5layers\plots\filtered_predictions.png" />
+                <h2>Predict Trading Signals Difference Bar chart</h2>
+                <img src="projects\MA_10\Trend_DNN_5layers\plots\pred_days_difference_bar_chart.png" />
+                <h2>Predict Trading Signals Difference Details</h2>
+                <pre>Average Difference: 8.914285714285715</pre>
+                <pre><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Date</th>
+      <th>Signal</th>
+      <th>ClosestDateInTest</th>
+      <th>DaysDifference</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>8</th>
+      <td>2015-04-07</td>
+      <td>Sell</td>
+      <td>2015-03-30</td>
+      <td>-8</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>2015-04-17</td>
+      <td>Buy</td>
+      <td>2015-04-08</td>
+      <td>-9</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>2015-05-11</td>
+      <td>Sell</td>
+      <td>2015-05-04</td>
+      <td>-7</td>
+    </tr>
+    <tr>
+      <th>40</th>
+      <td>2015-05-21</td>
+      <td>Buy</td>
+      <td>2015-05-13</td>
+      <td>-8</td>
+    </tr>
+    <tr>
+      <th>48</th>
+      <td>2015-06-03</td>
+      <td>Sell</td>
+      <td>2015-05-28</td>
+      <td>-6</td>
+    </tr>
+    <tr>
+      <th>64</th>
+      <td>2015-06-25</td>
+      <td>Buy</td>
+      <td>2015-06-17</td>
+      <td>-8</td>
+    </tr>
+    <tr>
+      <th>72</th>
+      <td>2015-07-08</td>
+      <td>Sell</td>
+      <td>2015-06-26</td>
+      <td>-12</td>
+    </tr>
+    <tr>
+      <th>80</th>
+      <td>2015-07-20</td>
+      <td>Buy</td>
+      <td>2015-07-13</td>
+      <td>-7</td>
+    </tr>
+    <tr>
+      <th>88</th>
+      <td>2015-07-30</td>
+      <td>Sell</td>
+      <td>2015-07-29</td>
+      <td>-1</td>
+    </tr>
+    <tr>
+      <th>120</th>
+      <td>2015-09-15</td>
+      <td>Buy</td>
+      <td>2015-09-14</td>
+      <td>-1</td>
+    </tr>
+    <tr>
+      <th>128</th>
+      <td>2015-09-25</td>
+      <td>Sell</td>
+      <td>2015-09-21</td>
+      <td>-4</td>
+    </tr>
+    <tr>
+      <th>136</th>
+      <td>2015-10-07</td>
+      <td>Buy</td>
+      <td>2015-10-02</td>
+      <td>-5</td>
+    </tr>
+    <tr>
+      <th>168</th>
+      <td>2015-11-20</td>
+      <td>Sell</td>
+      <td>2015-11-10</td>
+      <td>-10</td>
+    </tr>
+    <tr>
+      <th>176</th>
+      <td>2015-12-03</td>
+      <td>Buy</td>
+      <td>2015-11-20</td>
+      <td>-13</td>
+    </tr>
+    <tr>
+      <th>184</th>
+      <td>2015-12-15</td>
+      <td>Sell</td>
+      <td>2015-12-04</td>
+      <td>-11</td>
+    </tr>
+    <tr>
+      <th>192</th>
+      <td>2015-12-28</td>
+      <td>Buy</td>
+      <td>2015-12-22</td>
+      <td>-6</td>
+    </tr>
+    <tr>
+      <th>200</th>
+      <td>2016-01-08</td>
+      <td>Sell</td>
+      <td>2016-01-05</td>
+      <td>-3</td>
+    </tr>
+    <tr>
+      <th>216</th>
+      <td>2016-02-02</td>
+      <td>Buy</td>
+      <td>2016-01-27</td>
+      <td>-6</td>
+    </tr>
+    <tr>
+      <th>224</th>
+      <td>2016-02-12</td>
+      <td>Sell</td>
+      <td>2016-02-04</td>
+      <td>-8</td>
+    </tr>
+    <tr>
+      <th>232</th>
+      <td>2016-02-25</td>
+      <td>Buy</td>
+      <td>2016-02-16</td>
+      <td>-9</td>
+    </tr>
+    <tr>
+      <th>280</th>
+      <td>2016-05-04</td>
+      <td>Sell</td>
+      <td>2016-04-27</td>
+      <td>-7</td>
+    </tr>
+    <tr>
+      <th>296</th>
+      <td>2016-05-26</td>
+      <td>Buy</td>
+      <td>2016-05-24</td>
+      <td>-2</td>
+    </tr>
+    <tr>
+      <th>305</th>
+      <td>2016-06-09</td>
+      <td>Sell</td>
+      <td>2016-06-10</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>320</th>
+      <td>2016-06-30</td>
+      <td>Buy</td>
+      <td>2016-06-29</td>
+      <td>-1</td>
+    </tr>
+    <tr>
+      <th>329</th>
+      <td>2016-07-14</td>
+      <td>Sell</td>
+      <td>2016-06-10</td>
+      <td>-34</td>
+    </tr>
+    <tr>
+      <th>336</th>
+      <td>2016-07-25</td>
+      <td>Buy</td>
+      <td>2016-06-29</td>
+      <td>-26</td>
+    </tr>
+    <tr>
+      <th>360</th>
+      <td>2016-08-26</td>
+      <td>Sell</td>
+      <td>2016-08-23</td>
+      <td>-3</td>
+    </tr>
+    <tr>
+      <th>416</th>
+      <td>2016-11-15</td>
+      <td>Buy</td>
+      <td>2016-11-08</td>
+      <td>-7</td>
+    </tr>
+    <tr>
+      <th>448</th>
+      <td>2017-01-03</td>
+      <td>Sell</td>
+      <td>2016-12-27</td>
+      <td>-7</td>
+    </tr>
+    <tr>
+      <th>456</th>
+      <td>2017-01-13</td>
+      <td>Buy</td>
+      <td>2017-01-05</td>
+      <td>-8</td>
+    </tr>
+    <tr>
+      <th>504</th>
+      <td>2017-03-24</td>
+      <td>Sell</td>
+      <td>2017-03-14</td>
+      <td>-10</td>
+    </tr>
+    <tr>
+      <th>512</th>
+      <td>2017-04-05</td>
+      <td>Buy</td>
+      <td>2017-04-03</td>
+      <td>-2</td>
+    </tr>
+    <tr>
+      <th>520</th>
+      <td>2017-04-18</td>
+      <td>Sell</td>
+      <td>2017-04-10</td>
+      <td>-8</td>
+    </tr>
+    <tr>
+      <th>528</th>
+      <td>2017-04-28</td>
+      <td>Buy</td>
+      <td>2017-04-21</td>
+      <td>-7</td>
+    </tr>
+    <tr>
+      <th>545</th>
+      <td>2017-05-23</td>
+      <td>Sell</td>
+      <td>2017-05-16</td>
+      <td>-7</td>
+    </tr>
+    <tr>
+      <th>552</th>
+      <td>2017-06-02</td>
+      <td>Buy</td>
+      <td>2017-05-22</td>
+      <td>-11</td>
+    </tr>
+    <tr>
+      <th>576</th>
+      <td>2017-07-07</td>
+      <td>Sell</td>
+      <td>2017-06-28</td>
+      <td>-9</td>
+    </tr>
+    <tr>
+      <th>584</th>
+      <td>2017-07-19</td>
+      <td>Buy</td>
+      <td>2017-07-11</td>
+      <td>-8</td>
+    </tr>
+    <tr>
+      <th>600</th>
+      <td>2017-08-10</td>
+      <td>Sell</td>
+      <td>2017-08-07</td>
+      <td>-3</td>
+    </tr>
+    <tr>
+      <th>616</th>
+      <td>2017-09-01</td>
+      <td>Buy</td>
+      <td>2017-08-30</td>
+      <td>-2</td>
+    </tr>
+    <tr>
+      <th>624</th>
+      <td>2017-09-14</td>
+      <td>Sell</td>
+      <td>2017-08-07</td>
+      <td>-38</td>
+    </tr>
+    <tr>
+      <th>632</th>
+      <td>2017-09-26</td>
+      <td>Buy</td>
+      <td>2017-08-30</td>
+      <td>-27</td>
+    </tr>
+    <tr>
+      <th>728</th>
+      <td>2018-02-13</td>
+      <td>Sell</td>
+      <td>2018-02-01</td>
+      <td>-12</td>
+    </tr>
+    <tr>
+      <th>736</th>
+      <td>2018-02-26</td>
+      <td>Buy</td>
+      <td>2018-02-16</td>
+      <td>-10</td>
+    </tr>
+    <tr>
+      <th>752</th>
+      <td>2018-03-20</td>
+      <td>Sell</td>
+      <td>2018-03-16</td>
+      <td>-4</td>
+    </tr>
+    <tr>
+      <th>769</th>
+      <td>2018-04-13</td>
+      <td>Buy</td>
+      <td>2018-04-10</td>
+      <td>-3</td>
+    </tr>
+    <tr>
+      <th>816</th>
+      <td>2018-06-20</td>
+      <td>Sell</td>
+      <td>2018-06-19</td>
+      <td>-1</td>
+    </tr>
+    <tr>
+      <th>832</th>
+      <td>2018-07-13</td>
+      <td>Buy</td>
+      <td>2018-07-05</td>
+      <td>-8</td>
+    </tr>
+    <tr>
+      <th>896</th>
+      <td>2018-10-12</td>
+      <td>Sell</td>
+      <td>2018-10-03</td>
+      <td>-9</td>
+    </tr>
+    <tr>
+      <th>920</th>
+      <td>2018-11-15</td>
+      <td>Buy</td>
+      <td>2018-11-05</td>
+      <td>-10</td>
+    </tr>
+    <tr>
+      <th>936</th>
+      <td>2018-12-11</td>
+      <td>Sell</td>
+      <td>2018-12-10</td>
+      <td>-1</td>
+    </tr>
+    <tr>
+      <th>952</th>
+      <td>2019-01-04</td>
+      <td>Buy</td>
+      <td>2019-01-03</td>
+      <td>-1</td>
+    </tr>
+    <tr>
+      <th>1008</th>
+      <td>2019-03-27</td>
+      <td>Sell</td>
+      <td>2019-03-05</td>
+      <td>-22</td>
+    </tr>
+    <tr>
+      <th>1016</th>
+      <td>2019-04-08</td>
+      <td>Buy</td>
+      <td>2019-03-12</td>
+      <td>-27</td>
+    </tr>
+    <tr>
+      <th>1040</th>
+      <td>2019-05-13</td>
+      <td>Sell</td>
+      <td>2019-05-06</td>
+      <td>-7</td>
+    </tr>
+    <tr>
+      <th>1064</th>
+      <td>2019-06-17</td>
+      <td>Buy</td>
+      <td>2019-06-06</td>
+      <td>-11</td>
+    </tr>
+    <tr>
+      <th>1096</th>
+      <td>2019-08-01</td>
+      <td>Sell</td>
+      <td>2019-07-30</td>
+      <td>-2</td>
+    </tr>
+    <tr>
+      <th>1120</th>
+      <td>2019-09-05</td>
+      <td>Buy</td>
+      <td>2019-09-03</td>
+      <td>-2</td>
+    </tr>
+    <tr>
+      <th>1144</th>
+      <td>2019-10-09</td>
+      <td>Sell</td>
+      <td>2019-09-23</td>
+      <td>-16</td>
+    </tr>
+    <tr>
+      <th>1152</th>
+      <td>2019-10-21</td>
+      <td>Buy</td>
+      <td>2019-10-14</td>
+      <td>-7</td>
+    </tr>
+    <tr>
+      <th>1224</th>
+      <td>2020-02-04</td>
+      <td>Sell</td>
+      <td>2020-01-24</td>
+      <td>-11</td>
+    </tr>
+    <tr>
+      <th>1232</th>
+      <td>2020-02-14</td>
+      <td>Buy</td>
+      <td>2020-02-04</td>
+      <td>-10</td>
+    </tr>
+    <tr>
+      <th>1240</th>
+      <td>2020-02-27</td>
+      <td>Sell</td>
+      <td>2020-02-20</td>
+      <td>-7</td>
+    </tr>
+    <tr>
+      <th>1264</th>
+      <td>2020-04-01</td>
+      <td>Buy</td>
+      <td>2020-03-27</td>
+      <td>-5</td>
+    </tr>
+    <tr>
+      <th>1320</th>
+      <td>2020-06-22</td>
+      <td>Sell</td>
+      <td>2020-06-18</td>
+      <td>-4</td>
+    </tr>
+    <tr>
+      <th>1328</th>
+      <td>2020-07-02</td>
+      <td>Buy</td>
+      <td>2020-06-30</td>
+      <td>-2</td>
+    </tr>
+    <tr>
+      <th>1336</th>
+      <td>2020-07-15</td>
+      <td>Sell</td>
+      <td>2020-06-18</td>
+      <td>-27</td>
+    </tr>
+    <tr>
+      <th>1344</th>
+      <td>2020-07-27</td>
+      <td>Buy</td>
+      <td>2020-06-30</td>
+      <td>-27</td>
+    </tr>
+    <tr>
+      <th>1376</th>
+      <td>2020-09-10</td>
+      <td>Sell</td>
+      <td>2020-09-04</td>
+      <td>-6</td>
+    </tr>
+    <tr>
+      <th>1392</th>
+      <td>2020-10-02</td>
+      <td>Buy</td>
+      <td>2020-09-30</td>
+      <td>-2</td>
+    </tr>
+  </tbody>
+</table></pre>
+                <h2>Predict Trading Details</h2>
+                <img src="projects\MA_10\Trend_DNN_5layers\plots\pred_trade_signals_plot.png" />
+                <h2>Actual Trading Details</h2>
+                <img src="projects\MA_10\Trend_DNN_5layers\plots\test_trade_signals_plot.png" />
+                <h2>Trade Summary</h2>
+                <pre><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sharpe_ratio</th>
+      <th>initial_value</th>
+      <th>final_value</th>
+      <th>total_return</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.009967</td>
+      <td>10000.0</td>
+      <td>11882.830476</td>
+      <td>1.188283</td>
+    </tr>
+  </tbody>
+</table></pre>
+                <h2>Trade Details</h2>
+                <pre>2015-04-07, SELL EXECUTED, size_to_sell:0, signal:Sell (first), cash:10000.0, position:0
+2015-04-17, BUY EXECUTED, size_to_buy:4, signal:Buy, cash:10000.0, position:0
+2015-04-20, BUY EXECUTED, Price: 2084.110107421875, Cost: 8336.4404296875, Commission: 41.682202148437504, Cash: 1621.8773681640625, Value: 10023.476977539063
+2015-05-11, SELL EXECUTED, size_to_sell:4, signal:Sell, cash:1621.8773681640625, position:4
+2015-05-12, SELL EXECUTED, Price: 2102.8701171875, Cost: 8336.4404296875, Commission: 42.05740234375, Cash: 9991.300434570314, Value: 9991.300434570314
+2015-05-21, BUY EXECUTED, size_to_buy:4, signal:Buy, cash:9991.300434570314, position:0
+2015-05-22, BUY EXECUTED, Price: 2130.360107421875, Cost: 8521.4404296875, Commission: 42.6072021484375, Cash: 1427.2528027343765, Value: 9931.493037109376
+2015-06-03, SELL EXECUTED, size_to_sell:4, signal:Sell, cash:1427.2528027343765, position:4
+2015-06-04, SELL EXECUTED, Price: 2112.35009765625, Cost: 8521.4404296875, Commission: 42.247001953125, Cash: 9834.406191406251, Value: 9834.406191406251
+2015-06-25, BUY EXECUTED, size_to_buy:4, signal:Buy, cash:9834.406191406251, position:0
+2015-06-26, BUY EXECUTED, Price: 2102.6201171875, Cost: 8410.48046875, Commission: 42.05240234375, Cash: 1381.8733203125014, Value: 9787.833281250001
+2015-07-08, SELL EXECUTED, size_to_sell:4, signal:Sell, cash:1381.8733203125014, position:4
+2015-07-09, SELL EXECUTED, Price: 2049.72998046875, Cost: 8410.48046875, Commission: 40.994599609375, Cash: 9539.798642578126, Value: 9539.798642578126
+2015-07-20, BUY EXECUTED, size_to_buy:4, signal:Buy, cash:9539.798642578126, position:0
+2015-07-21, BUY EXECUTED, Price: 2127.550048828125, Cost: 8510.2001953125, Commission: 42.5510009765625, Cash: 987.047446289063, Value: 9463.887290039063
+2015-07-30, SELL EXECUTED, size_to_sell:4, signal:Sell, cash:987.047446289063, position:4
+2015-07-31, SELL EXECUTED, Price: 2111.60009765625, Cost: 8510.2001953125, Commission: 42.232001953125, Cash: 9391.215834960938, Value: 9391.215834960938
+2015-09-15, BUY EXECUTED, size_to_buy:4, signal:Buy, cash:9391.215834960938, position:0
+2015-09-16, BUY EXECUTED, Price: 1978.02001953125, Cost: 7912.080078125, Commission: 39.560400390625, Cash: 1439.575356445313, Value: 9420.815590820313
+2015-09-25, SELL EXECUTED, size_to_sell:4, signal:Sell, cash:1439.575356445313, position:4
+2015-09-28, SELL EXECUTED, Price: 1929.1800537109375, Cost: 7912.080078125, Commission: 38.58360107421875, Cash: 9117.711970214845, Value: 9117.711970214845
+2015-10-07, BUY EXECUTED, size_to_buy:4, signal:Buy, cash:9117.711970214845, position:0
+2015-10-08, BUY EXECUTED, Price: 1994.010009765625, Cost: 7976.0400390625, Commission: 39.880200195312504, Cash: 1101.7917309570323, Value: 9155.511945800783
+2015-11-20, SELL EXECUTED, size_to_sell:4, signal:Sell, cash:1101.7917309570323, position:4
+2015-11-23, SELL EXECUTED, Price: 2089.409912109375, Cost: 7976.0400390625, Commission: 41.7881982421875, Cash: 9417.643181152345, Value: 9417.643181152345
+2015-12-03, BUY EXECUTED, size_to_buy:4, signal:Buy, cash:9417.643181152345, position:0
+2015-12-04, BUY EXECUTED, Price: 2051.239990234375, Cost: 8204.9599609375, Commission: 41.024799804687504, Cash: 1171.6584204101578, Value: 9538.418186035158
+2015-12-15, SELL EXECUTED, size_to_sell:4, signal:Sell, cash:1171.6584204101578, position:4
+2015-12-16, SELL EXECUTED, Price: 2046.5, Cost: 8204.9599609375, Commission: 40.93, Cash: 9316.728420410158, Value: 9316.728420410158
+2015-12-28, BUY EXECUTED, size_to_buy:4, signal:Buy, cash:9316.728420410158, position:0
+2015-12-29, BUY EXECUTED, Price: 2060.5400390625, Cost: 8242.16015625, Commission: 41.21080078125, Cash: 1033.3574633789078, Value: 9346.797893066409
+2016-01-08, SELL EXECUTED, size_to_sell:4, signal:Sell, cash:1033.3574633789078, position:4
+2016-01-11, SELL EXECUTED, Price: 1926.1199951171875, Cost: 8242.16015625, Commission: 38.52239990234375, Cash: 8699.315043945315, Value: 8699.315043945315
+2016-02-02, BUY EXECUTED, size_to_buy:4, signal:Buy, cash:8699.315043945315, position:0
+2016-02-03, BUY EXECUTED, Price: 1907.0699462890625, Cost: 7628.27978515625, Commission: 38.14139892578125, Cash: 1032.8938598632835, Value: 8683.013977050783
+2016-02-12, SELL EXECUTED, size_to_sell:4, signal:Sell, cash:1032.8938598632835, position:4
+2016-02-16, SELL EXECUTED, Price: 1871.43994140625, Cost: 7628.27978515625, Commission: 37.428798828125004, Cash: 8481.224826660158, Value: 8481.224826660158
+2016-02-25, BUY EXECUTED, size_to_buy:4, signal:Buy, cash:8481.224826660158, position:0
+2016-02-26, BUY EXECUTED, Price: 1954.949951171875, Cost: 7819.7998046875, Commission: 39.0989990234375, Cash: 622.3260229492207, Value: 8414.52621826172
+2016-05-04, SELL EXECUTED, size_to_sell:4, signal:Sell, cash:622.3260229492207, position:4
+2016-05-05, SELL EXECUTED, Price: 2052.949951171875, Cost: 7819.7998046875, Commission: 41.0589990234375, Cash: 8793.066828613284, Value: 8793.066828613284
+2016-05-26, BUY EXECUTED, size_to_buy:4, signal:Buy, cash:8793.066828613284, position:0
+2016-05-27, BUY EXECUTED, Price: 2090.06005859375, Cost: 8360.240234375, Commission: 41.801201171875, Cash: 391.0253930664091, Value: 8787.26562744141
+2016-06-09, SELL EXECUTED, size_to_sell:4, signal:Sell, cash:391.0253930664091, position:4
+2016-06-10, SELL EXECUTED, Price: 2109.570068359375, Cost: 8360.240234375, Commission: 42.1914013671875, Cash: 8787.114265136723, Value: 8787.114265136723
+2016-06-30, BUY EXECUTED, size_to_buy:4, signal:Buy, cash:8787.114265136723, position:0
+2016-07-01, BUY EXECUTED, Price: 2099.340087890625, Cost: 8397.3603515625, Commission: 41.9868017578125, Cash: 347.7671118164102, Value: 8759.56691650391
+2016-07-14, SELL EXECUTED, size_to_sell:4, signal:Sell, cash:347.7671118164102, position:4
+2016-07-15, SELL EXECUTED, Price: 2165.1298828125, Cost: 8397.3603515625, Commission: 43.30259765625, Cash: 8964.984045410161, Value: 8964.984045410161
+2016-07-25, BUY EXECUTED, size_to_buy:4, signal:Buy, cash:8964.984045410161, position:0
+2016-07-26, BUY EXECUTED, Price: 2168.969970703125, Cost: 8675.8798828125, Commission: 43.3793994140625, Cash: 245.72476318359884, Value: 8922.444489746098
+2016-08-26, SELL EXECUTED, size_to_sell:4, signal:Sell, cash:245.72476318359884, position:4
+2016-08-29, SELL EXECUTED, Price: 2170.18994140625, Cost: 8675.8798828125, Commission: 43.403798828125, Cash: 8883.080729980473, Value: 8883.080729980473
+2016-11-15, BUY EXECUTED, size_to_buy:4, signal:Buy, cash:8883.080729980473, position:0
+2016-11-16, BUY EXECUTED, Price: 2177.530029296875, Cost: 8710.1201171875, Commission: 43.5506005859375, Cash: 129.41001220703532, Value: 8837.169777832036
+2017-01-03, SELL EXECUTED, size_to_sell:4, signal:Sell, cash:129.41001220703532, position:4
+2017-01-04, SELL EXECUTED, Price: 2261.60009765625, Cost: 8710.1201171875, Commission: 45.232001953125, Cash: 9130.57840087891, Value: 9130.57840087891
+2017-01-13, BUY EXECUTED, size_to_buy:3, signal:Buy, cash:9130.57840087891, position:0
+2017-01-17, BUY EXECUTED, Price: 2269.139892578125, Cost: 6807.419677734375, Commission: 34.03709838867187, Cash: 2289.1216247558636, Value: 9092.79130249024
+2017-03-24, SELL EXECUTED, size_to_sell:3, signal:Sell, cash:2289.1216247558636, position:3
+2017-03-27, SELL EXECUTED, Price: 2329.110107421875, Cost: 6807.419677734375, Commission: 34.936651611328124, Cash: 9241.515295410161, Value: 9241.515295410161
+2017-04-05, BUY EXECUTED, size_to_buy:3, signal:Buy, cash:9241.515295410161, position:0
+2017-04-06, BUY EXECUTED, Price: 2353.7900390625, Cost: 7061.3701171875, Commission: 35.3068505859375, Cash: 2144.838327636724, Value: 9217.308298339849
+2017-04-18, SELL EXECUTED, size_to_sell:3, signal:Sell, cash:2144.838327636724, position:3
+2017-04-19, SELL EXECUTED, Price: 2346.7900390625, Cost: 7061.3701171875, Commission: 35.2018505859375, Cash: 9150.006594238286, Value: 9150.006594238286
+2017-04-28, BUY EXECUTED, size_to_buy:3, signal:Buy, cash:9150.006594238286, position:0
+2017-05-01, BUY EXECUTED, Price: 2388.5, Cost: 7165.5, Commission: 35.8275, Cash: 1948.679094238286, Value: 9113.669328613287
+2017-05-23, SELL EXECUTED, size_to_sell:3, signal:Sell, cash:1948.679094238286, position:3
+2017-05-24, SELL EXECUTED, Price: 2401.409912109375, Cost: 7165.5, Commission: 36.021148681640625, Cash: 9116.887681884771, Value: 9116.887681884771
+2017-06-02, BUY EXECUTED, size_to_buy:3, signal:Buy, cash:9116.887681884771, position:0
+2017-06-05, BUY EXECUTED, Price: 2437.830078125, Cost: 7313.490234375, Commission: 36.567451171875, Cash: 1766.829996337896, Value: 9075.130289306646
+2017-07-07, SELL EXECUTED, size_to_sell:3, signal:Sell, cash:1766.829996337896, position:3
+2017-07-10, SELL EXECUTED, Price: 2424.510009765625, Cost: 7313.490234375, Commission: 36.36765014648437, Cash: 9003.992375488286, Value: 9003.992375488286
+2017-07-19, BUY EXECUTED, size_to_buy:3, signal:Buy, cash:9003.992375488286, position:0
+2017-07-20, BUY EXECUTED, Price: 2475.56005859375, Cost: 7426.68017578125, Commission: 37.13340087890625, Cash: 1540.1787988281294, Value: 8960.528652343753
+2017-08-10, SELL EXECUTED, size_to_sell:3, signal:Sell, cash:1540.1787988281294, position:3
+2017-08-11, SELL EXECUTED, Price: 2441.0400390625, Cost: 7426.68017578125, Commission: 36.6156005859375, Cash: 8826.683315429691, Value: 8826.683315429691
+2017-09-01, BUY EXECUTED, size_to_buy:3, signal:Buy, cash:8826.683315429691, position:0
+2017-09-05, BUY EXECUTED, Price: 2470.35009765625, Cost: 7411.05029296875, Commission: 37.05525146484375, Cash: 1378.5777709960973, Value: 8752.128063964847
+2017-09-14, SELL EXECUTED, size_to_sell:3, signal:Sell, cash:1378.5777709960973, position:3
+2017-09-15, SELL EXECUTED, Price: 2495.669921875, Cost: 7411.05029296875, Commission: 37.435048828125, Cash: 8828.152487792971, Value: 8828.152487792971
+2017-09-26, BUY EXECUTED, size_to_buy:3, signal:Buy, cash:8828.152487792971, position:0
+2017-09-27, BUY EXECUTED, Price: 2503.300048828125, Cost: 7509.900146484375, Commission: 37.549500732421876, Cash: 1280.7028405761746, Value: 8801.822957763674
+2018-02-13, SELL EXECUTED, size_to_sell:3, signal:Sell, cash:1280.7028405761746, position:3
+2018-02-14, SELL EXECUTED, Price: 2651.2099609375, Cost: 7509.900146484375, Commission: 39.7681494140625, Cash: 9194.56457397461, Value: 9194.56457397461
+2018-02-26, BUY EXECUTED, size_to_buy:3, signal:Buy, cash:9194.56457397461, position:0
+2018-02-27, BUY EXECUTED, Price: 2780.449951171875, Cost: 8341.349853515625, Commission: 41.706749267578125, Cash: 811.5079711914074, Value: 9044.348059082033
+2018-03-20, SELL EXECUTED, size_to_sell:3, signal:Sell, cash:811.5079711914074, position:3
+2018-03-21, SELL EXECUTED, Price: 2714.989990234375, Cost: 8341.349853515625, Commission: 40.72484985351562, Cash: 8915.753092041017, Value: 8915.753092041017
+2018-04-13, BUY EXECUTED, size_to_buy:3, signal:Buy, cash:8915.753092041017, position:0
+2018-04-16, BUY EXECUTED, Price: 2670.10009765625, Cost: 8010.30029296875, Commission: 40.051501464843746, Cash: 865.4012976074234, Value: 8898.921561279298
+2018-06-20, SELL EXECUTED, size_to_sell:3, signal:Sell, cash:865.4012976074234, position:3
+2018-06-21, SELL EXECUTED, Price: 2769.280029296875, Cost: 8010.30029296875, Commission: 41.539200439453126, Cash: 9131.702185058595, Value: 9131.702185058595
+2018-07-13, BUY EXECUTED, size_to_buy:3, signal:Buy, cash:9131.702185058595, position:0
+2018-07-16, BUY EXECUTED, Price: 2797.360107421875, Cost: 8392.080322265625, Commission: 41.96040161132812, Cash: 697.661461181642, Value: 9092.951256103517
+2018-10-12, SELL EXECUTED, size_to_sell:3, signal:Sell, cash:697.661461181642, position:3
+2018-10-15, SELL EXECUTED, Price: 2763.830078125, Cost: 8392.080322265625, Commission: 41.457451171875, Cash: 8947.694244384767, Value: 8947.694244384767
+2018-11-15, BUY EXECUTED, size_to_buy:3, signal:Buy, cash:8947.694244384767, position:0
+2018-11-16, BUY EXECUTED, Price: 2718.5400390625, Cost: 8155.6201171875, Commission: 40.7781005859375, Cash: 751.2960266113299, Value: 8960.10608520508
+2018-12-11, SELL EXECUTED, size_to_sell:3, signal:Sell, cash:751.2960266113299, position:3
+2018-12-12, SELL EXECUTED, Price: 2658.22998046875, Cost: 8155.6201171875, Commission: 39.87344970703125, Cash: 8686.112518310549, Value: 8686.112518310549
+2019-01-04, BUY EXECUTED, size_to_buy:3, signal:Buy, cash:8686.112518310549, position:0
+2019-01-07, BUY EXECUTED, Price: 2535.610107421875, Cost: 7606.830322265625, Commission: 38.03415161132812, Cash: 1041.2480444335956, Value: 8690.317868652346
+2019-03-27, SELL EXECUTED, size_to_sell:3, signal:Sell, cash:1041.2480444335956, position:3
+2019-03-28, SELL EXECUTED, Price: 2809.39990234375, Cost: 7606.830322265625, Commission: 42.14099853515625, Cash: 9427.30675292969, Value: 9427.30675292969
+2019-04-08, BUY EXECUTED, size_to_buy:3, signal:Buy, cash:9427.30675292969, position:0
+2019-04-09, BUY EXECUTED, Price: 2886.580078125, Cost: 8659.740234375, Commission: 43.298701171874995, Cash: 724.2678173828145, Value: 9358.86767089844
+2019-05-13, SELL EXECUTED, size_to_sell:3, signal:Sell, cash:724.2678173828145, position:3
+2019-05-14, SELL EXECUTED, Price: 2820.1201171875, Cost: 8659.740234375, Commission: 42.3018017578125, Cash: 9142.326367187503, Value: 9142.326367187503
+2019-06-17, BUY EXECUTED, size_to_buy:3, signal:Buy, cash:9142.326367187503, position:0
+2019-06-18, BUY EXECUTED, Price: 2906.7099609375, Cost: 8720.1298828125, Commission: 43.600649414062495, Cash: 378.5958349609404, Value: 9131.845834960941
+2019-08-01, SELL EXECUTED, size_to_sell:3, signal:Sell, cash:378.5958349609404, position:3
+2019-08-02, SELL EXECUTED, Price: 2943.89990234375, Cost: 8720.1298828125, Commission: 44.15849853515625, Cash: 9166.137043457034, Value: 9166.137043457034
+2019-09-05, BUY EXECUTED, size_to_buy:3, signal:Buy, cash:9166.137043457034, position:0
+2019-09-06, BUY EXECUTED, Price: 2980.330078125, Cost: 8940.990234375, Commission: 44.704951171874995, Cash: 180.44185791015946, Value: 9116.57174072266
+2019-10-09, SELL EXECUTED, size_to_sell:3, signal:Sell, cash:180.44185791015946, position:3
+2019-10-10, SELL EXECUTED, Price: 2918.550048828125, Cost: 8940.990234375, Commission: 43.778250732421874, Cash: 8892.313753662113, Value: 8892.313753662113
+2019-10-21, BUY EXECUTED, size_to_buy:2, signal:Buy, cash:8892.313753662113, position:0
+2019-10-22, BUY EXECUTED, Price: 3010.72998046875, Cost: 6021.4599609375, Commission: 30.1072998046875, Cash: 2840.746492919925, Value: 8832.726473388675
+2020-02-04, SELL EXECUTED, size_to_sell:2, signal:Sell, cash:2840.746492919925, position:2
+2020-02-05, SELL EXECUTED, Price: 3324.909912109375, Cost: 6021.4599609375, Commission: 33.24909912109375, Cash: 9457.31721801758, Value: 9457.31721801758
+2020-02-14, BUY EXECUTED, size_to_buy:2, signal:Buy, cash:9457.31721801758, position:0
+2020-02-18, BUY EXECUTED, Price: 3369.0400390625, Cost: 6738.080078125, Commission: 33.690400390625, Cash: 2685.5467395019555, Value: 9426.126817626955
+2020-02-27, SELL EXECUTED, size_to_sell:2, signal:Sell, cash:2685.5467395019555, position:2
+2020-02-28, SELL EXECUTED, Price: 2916.89990234375, Cost: 6738.080078125, Commission: 29.1689990234375, Cash: 8490.177545166018, Value: 8490.177545166018
+2020-04-01, BUY EXECUTED, size_to_buy:3, signal:Buy, cash:8490.177545166018, position:0
+2020-04-02, BUY EXECUTED, Price: 2458.5400390625, Cost: 7375.6201171875, Commission: 36.878100585937496, Cash: 1077.6793273925803, Value: 8658.37903442383
+2020-06-22, SELL EXECUTED, size_to_sell:3, signal:Sell, cash:1077.6793273925803, position:3
+2020-06-23, SELL EXECUTED, Price: 3138.699951171875, Cost: 7375.6201171875, Commission: 47.080499267578126, Cash: 10446.698681640626, Value: 10446.698681640626
+2020-07-02, BUY EXECUTED, size_to_buy:3, signal:Buy, cash:10446.698681640626, position:0
+2020-07-06, BUY EXECUTED, Price: 3155.2900390625, Cost: 9465.8701171875, Commission: 47.3293505859375, Cash: 933.4992138671886, Value: 10472.659125976563
+2020-07-15, SELL EXECUTED, size_to_sell:3, signal:Sell, cash:933.4992138671886, position:3
+2020-07-16, SELL EXECUTED, Price: 3208.360107421875, Cost: 9465.8701171875, Commission: 48.12540161132812, Cash: 10510.454134521484, Value: 10510.454134521484
+2020-07-27, BUY EXECUTED, size_to_buy:3, signal:Buy, cash:10510.454134521484, position:0
+2020-07-28, BUY EXECUTED, Price: 3234.27001953125, Cost: 9702.81005859375, Commission: 48.51405029296875, Cash: 759.1300256347652, Value: 10414.449849853516
+2020-09-10, SELL EXECUTED, size_to_sell:3, signal:Sell, cash:759.1300256347652, position:3
+2020-09-11, SELL EXECUTED, Price: 3352.699951171875, Cost: 9702.81005859375, Commission: 50.29049926757812, Cash: 10766.939379882813, Value: 10766.939379882813
+2020-10-02, BUY EXECUTED, size_to_buy:3, signal:Buy (last), cash:10766.939379882813, position:0
+2020-10-05, BUY EXECUTED, Price: 3367.27001953125, Cost: 10101.81005859375, Commission: 50.509050292968745, Cash: 614.6202709960945, Value: 10840.420563964844
+</pre>
+            </body>
+        </html>
+        
