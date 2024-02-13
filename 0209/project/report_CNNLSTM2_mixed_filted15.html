@@ -1,0 +1,288 @@
+
+        <html>
+            <head>
+                <title>Stock Price Prediction Report</title>
+            </head>
+            <body>
+                <h1>Stock Price Prediction Report</h1>
+                <h2>Model Summary</h2>
+                <pre>Seq2Seq(
+  (encoder_conv1): Conv1d(19, 6, kernel_size=(3,), stride=(1,), padding=(1,))
+  (encoder_conv2): Conv1d(6, 16, kernel_size=(3,), stride=(1,), padding=(1,))
+  (encoder_convs): Sequential(
+    (0): Conv1d(19, 6, kernel_size=(3,), stride=(1,), padding=(1,))
+    (1): LayerNorm((6, 64), eps=1e-05, elementwise_affine=True)
+    (2): ReLU()
+    (3): MaxPool1d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (4): Conv1d(6, 16, kernel_size=(3,), stride=(1,), padding=(1,))
+    (5): LayerNorm((16, 32), eps=1e-05, elementwise_affine=True)
+    (6): ReLU()
+    (7): MaxPool1d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+  )
+  (encoder_lstm): LSTM(16, 64, batch_first=True, dropout=0.2)
+  (decoder_lstm): LSTM(2, 16, batch_first=True, dropout=0.2)
+  (decoder_fc): Linear(in_features=16, out_features=2, bias=True)
+), 
+Number of parameter: 24750</pre>
+                <h2>Training Report</h2>
+                <img src="plots/training_curve.png" />
+                <h2>Online Training Report</h2>
+                <img src="plots/online_training_curve.png" />
+                <h2>Confusion Matrix</h2>
+                <pre>
+Accuracy: 0.72
+Precision: 0.66
+Recall: 0.64
+F1 Score: 0.65
+
+        </pre>
+                <img src="plots/confusion_matrix.png" />
+                <h2>Predictions Compared With Actual Signals</h2>
+                <img src="plots/predictions.png" />
+                <h2>Filtered Predictions Compared With Actual Signals</h2>
+                <img src="plots/filtered_predictions.png" />
+                <h2>Predict Trading Signals Difference Bar chart</h2>
+                <img src="plots/pred_days_difference_bar_chart.png" />
+                <h2>Predict Trading Signals Difference Details</h2>
+                <pre>Average Difference: 13.363636363636363</pre>
+                <pre><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Date</th>
+      <th>Signal</th>
+      <th>ClosestDateInTest</th>
+      <th>DaysDifference</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>112</th>
+      <td>2015-09-24</td>
+      <td>Sell</td>
+      <td>2015-08-10</td>
+      <td>-45</td>
+    </tr>
+    <tr>
+      <th>128</th>
+      <td>2015-10-16</td>
+      <td>Buy</td>
+      <td>2015-10-01</td>
+      <td>-15</td>
+    </tr>
+    <tr>
+      <th>176</th>
+      <td>2015-12-24</td>
+      <td>Sell</td>
+      <td>2015-11-30</td>
+      <td>-24</td>
+    </tr>
+    <tr>
+      <th>211</th>
+      <td>2016-02-17</td>
+      <td>Buy</td>
+      <td>2016-02-12</td>
+      <td>-5</td>
+    </tr>
+    <tr>
+      <th>304</th>
+      <td>2016-06-29</td>
+      <td>Sell</td>
+      <td>2016-06-23</td>
+      <td>-6</td>
+    </tr>
+    <tr>
+      <th>320</th>
+      <td>2016-07-22</td>
+      <td>Buy</td>
+      <td>2016-07-07</td>
+      <td>-15</td>
+    </tr>
+    <tr>
+      <th>384</th>
+      <td>2016-10-21</td>
+      <td>Sell</td>
+      <td>2016-10-12</td>
+      <td>-9</td>
+    </tr>
+    <tr>
+      <th>416</th>
+      <td>2016-12-07</td>
+      <td>Buy</td>
+      <td>2016-11-07</td>
+      <td>-30</td>
+    </tr>
+    <tr>
+      <th>592</th>
+      <td>2017-08-21</td>
+      <td>Sell</td>
+      <td>2017-08-15</td>
+      <td>-6</td>
+    </tr>
+    <tr>
+      <th>608</th>
+      <td>2017-09-13</td>
+      <td>Buy</td>
+      <td>2017-09-07</td>
+      <td>-6</td>
+    </tr>
+    <tr>
+      <th>711</th>
+      <td>2018-02-09</td>
+      <td>Sell</td>
+      <td>2018-02-02</td>
+      <td>-7</td>
+    </tr>
+    <tr>
+      <th>734</th>
+      <td>2018-03-15</td>
+      <td>Buy</td>
+      <td>2018-03-05</td>
+      <td>-10</td>
+    </tr>
+    <tr>
+      <th>880</th>
+      <td>2018-10-11</td>
+      <td>Sell</td>
+      <td>2018-10-08</td>
+      <td>-3</td>
+    </tr>
+    <tr>
+      <th>945</th>
+      <td>2019-01-16</td>
+      <td>Buy</td>
+      <td>2019-01-14</td>
+      <td>-2</td>
+    </tr>
+    <tr>
+      <th>1127</th>
+      <td>2019-10-07</td>
+      <td>Sell</td>
+      <td>2019-10-01</td>
+      <td>-6</td>
+    </tr>
+    <tr>
+      <th>1150</th>
+      <td>2019-11-07</td>
+      <td>Buy</td>
+      <td>2019-10-18</td>
+      <td>-20</td>
+    </tr>
+    <tr>
+      <th>1232</th>
+      <td>2020-03-09</td>
+      <td>Sell</td>
+      <td>2020-02-21</td>
+      <td>-17</td>
+    </tr>
+    <tr>
+      <th>1256</th>
+      <td>2020-04-13</td>
+      <td>Buy</td>
+      <td>2020-04-07</td>
+      <td>-6</td>
+    </tr>
+    <tr>
+      <th>1307</th>
+      <td>2020-06-24</td>
+      <td>Sell</td>
+      <td>2020-07-02</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>1328</th>
+      <td>2020-07-24</td>
+      <td>Buy</td>
+      <td>2020-07-09</td>
+      <td>-15</td>
+    </tr>
+    <tr>
+      <th>1366</th>
+      <td>2020-09-17</td>
+      <td>Sell</td>
+      <td>2020-09-15</td>
+      <td>-2</td>
+    </tr>
+    <tr>
+      <th>1424</th>
+      <td>2020-12-09</td>
+      <td>Buy</td>
+      <td>2020-11-02</td>
+      <td>-37</td>
+    </tr>
+  </tbody>
+</table></pre>
+                <h2>Predict Trading Details</h2>
+                <img src="plots/pred_trade_signals_details_kbar.png" />
+                <h2>Actual Trading Details</h2>
+                <img src="plots/test_trade_signals_details_kbar.png" />
+                <h2>Trade Summary</h2>
+                <pre><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sharpe_ratio</th>
+      <th>initial_value</th>
+      <th>final_value</th>
+      <th>total_return</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>-1.227108</td>
+      <td>10000.0</td>
+      <td>9476.405777</td>
+      <td>0.947641</td>
+    </tr>
+  </tbody>
+</table></pre>
+                <h2>Trade Details</h2>
+                <pre>2015-09-24, SINGLE SELL EXECUTED
+2015-09-25, SELL EXECUTED, Price: 1140.239990234375, Cost: -1140.239990234375, Commission: 1.140239990234375, Cash: 11139.09975024414, Value: 10016.30971118164
+2015-10-16, DOUBLE BUY EXECUTED
+2015-10-19, BUY EXECUTED, Price: 1161.800048828125, Cost: 21.56005859375, Commission: 2.32360009765625, Cash: 8813.176052490233, Value: 9977.476101318358
+2015-12-24, DOUBLE SELL EXECUTED
+2015-12-28, SELL EXECUTED, Price: 1153.989990234375, Cost: 7.81005859375, Commission: 2.30797998046875, Cash: 11118.848052978514, Value: 9970.638092041014
+2016-02-17, DOUBLE BUY EXECUTED
+2016-02-18, BUY EXECUTED, Price: 1011.97998046875, Cost: -142.010009765625, Commission: 2.0239599609375, Cash: 9092.864132080076, Value: 10097.574154052732
+2016-06-29, DOUBLE SELL EXECUTED
+2016-06-30, SELL EXECUTED, Price: 1132.1500244140625, Cost: -120.1700439453125, Commission: 2.264300048828125, Cash: 11354.899880859373, Value: 10202.97983691406
+2016-07-22, DOUBLE BUY EXECUTED
+2016-07-25, BUY EXECUTED, Price: 1212.8399658203125, Cost: 80.68994140625, Commission: 2.4256799316406252, Cash: 8926.79426928711, Value: 10136.614215576172
+2016-10-21, DOUBLE SELL EXECUTED
+2016-10-24, SELL EXECUTED, Price: 1219.72998046875, Cost: -6.8900146484375, Commission: 2.4394599609375, Cash: 11363.814770263672, Value: 10137.364819091797
+2016-12-07, DOUBLE BUY EXECUTED
+2016-12-08, BUY EXECUTED, Price: 1364.4300537109375, Cost: 144.7000732421875, Commission: 2.728860107421875, Cash: 8632.225802734376, Value: 10018.595797851563
+2017-08-21, DOUBLE SELL EXECUTED
+2017-08-22, SELL EXECUTED, Price: 1357.8900146484375, Cost: 6.5400390625, Commission: 2.7157800292968752, Cash: 11345.290052001956, Value: 9973.750012939456
+2017-09-13, DOUBLE BUY EXECUTED
+2017-09-14, BUY EXECUTED, Price: 1426.5699462890625, Cost: 68.679931640625, Commission: 2.8531398925781253, Cash: 8489.297019531254, Value: 9914.317039062504
+2018-02-09, DOUBLE SELL EXECUTED
+2018-02-12, SELL EXECUTED, Price: 1479.1099853515625, Cost: -52.5400390625, Commission: 2.958219970703125, Cash: 11444.558770263675, Value: 9953.578789794925
+2018-03-15, DOUBLE BUY EXECUTED
+2018-03-16, BUY EXECUTED, Price: 1576.5799560546875, Cost: 97.469970703125, Commission: 3.153159912109375, Cash: 8288.245698242192, Value: 9874.295747070317
+2018-10-11, DOUBLE SELL EXECUTED
+2018-10-12, SELL EXECUTED, Price: 1546.8499755859375, Cost: 29.72998046875, Commission: 3.093699951171875, Cash: 11378.851949462894, Value: 9832.171895751957
+2019-01-16, DOUBLE BUY EXECUTED
+2019-01-17, BUY EXECUTED, Price: 1453.8299560546875, Cost: -93.02001953125, Commission: 2.907659912109375, Cash: 8468.284377441409, Value: 9935.534377441409
+2019-10-07, DOUBLE SELL EXECUTED
+2019-10-08, SELL EXECUTED, Price: 1494.6099853515625, Cost: -40.780029296875, Commission: 2.9892199707031253, Cash: 11454.51512817383, Value: 9981.915152587893
+2019-11-07, DOUBLE BUY EXECUTED
+2019-11-08, BUY EXECUTED, Price: 1590.9599609375, Cost: 96.3499755859375, Commission: 3.181919921875, Cash: 8269.413286376957, Value: 9868.27327172852
+2020-03-09, DOUBLE SELL EXECUTED
+2020-03-10, SELL EXECUTED, Price: 1329.8800048828125, Cost: 261.0799560546875, Commission: 2.659760009765625, Cash: 10926.513536132816, Value: 9575.613511718753
+2020-04-13, DOUBLE BUY EXECUTED
+2020-04-14, BUY EXECUTED, Price: 1232.3199462890625, Cost: -97.56005859375, Commission: 2.464639892578125, Cash: 8459.409003662111, Value: 9696.738959716798
+2020-06-24, DOUBLE SELL EXECUTED
+2020-06-25, SELL EXECUTED, Price: 1388.4100341796875, Cost: -156.090087890625, Commission: 2.776820068359375, Cash: 11233.452251953126, Value: 9820.142193359376
+2020-07-24, DOUBLE BUY EXECUTED
+2020-07-27, BUY EXECUTED, Price: 1468.22998046875, Cost: 79.8199462890625, Commission: 2.9364599609375, Cash: 8294.05583105469, Value: 9778.705855468752
+2020-09-17, DOUBLE SELL EXECUTED
+2020-09-18, SELL EXECUTED, Price: 1544.3399658203125, Cost: -76.1099853515625, Commission: 3.088679931640625, Cash: 11379.647082763675, Value: 9842.8670534668
+2020-12-09, SINGLE BUY EXECUTED
+2020-12-10, BUY EXECUTED, Price: 1901.3399658203125, Cost: -1544.3399658203125, Commission: 1.9013399658203125, Cash: 9476.405776977543, Value: 9476.405776977543
+</pre>
+            </body>
+        </html>
+        
